@@ -1,0 +1,15 @@
+package UserManagement.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class User {
+    private Integer id;
+    private String uuid;
+    private String name;
+    private String email;
+    private String password;
+    private String profile;
+}
