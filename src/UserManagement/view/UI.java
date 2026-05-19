@@ -48,7 +48,7 @@ public class UI {
         System.out.println("""
                 ==================== User Management System ========================
                 1. Create User
-                2. Search User by UUID
+                
                 3. Search User by name
                 4. Delete User by ID
                 5. Update User by UUID
@@ -96,17 +96,8 @@ public class UI {
 //                   displayUsers();
 
                 }
-                case 2 ->{
-                    System.out.print("Enter User UUID: ");
-                    String userUUID = new Scanner(System.in).nextLine();
-                    APIResponse<UserResponseDto> getUser = userController.getUserById(userUUID);
-                    System.out.println(getUser.message());
-                    if (getUser.data() != null) {
-                        DataConnectionConfigure.getConnection();
 
-                    }
-                }
-                case 3 -> {
+                case 2 -> {
                     System.out.print("Enter name to search: ");
                     String name = new Scanner(System.in).nextLine();
                     APIResponse<List<UserResponseDto>> users = userController.searchUserByName(name);
@@ -114,13 +105,13 @@ public class UI {
 
 
                 }
-                case 4 -> {
+                case 3 -> {
                     System.out.print("Enter User ID to delete: ");
                  int id = new Scanner(System.in).nextInt();
                     APIResponse<Integer> deleteUser = userController.deleteUserByid(id);
                     System.out.println(deleteUser.message());
                 }
-                case 5 -> {
+                case 4 -> {
                     System.out.print("Enter User ID to update: ");
                   int  id = new Scanner(System.in).nextInt();
                     System.out.print("[+] Input new name: ");
@@ -137,12 +128,12 @@ public class UI {
                     System.out.println(updateUser.message());
 
                 }
-                case 6-> {
+                case 5-> {
                     APIResponse<List<UserResponseDto>> allUsers = userController.getAllUser();
                     displayUsers(List.of(allUsers));
 
                 }
-                case 7-> {
+                case 6-> {
                     System.out.println("System closed ");
                     try {
                         System.exit(0);
