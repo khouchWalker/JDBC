@@ -15,7 +15,7 @@ public class UserController {
 
     public APIResponse<UserResponseDto> createUser(CreateUserDto createUserDto) {
         return APIResponse.<UserResponseDto>builder()
-                .status(200)
+                .status(201)
                 .message("Created user successfully 😎")
                 .data(userService.createUser(createUserDto))
                 .timeStamp(LocalDate.now())
@@ -39,8 +39,8 @@ public class UserController {
         );
     }
 
-    public APIResponse<UserResponseDto> updateUserByUuid(String uuid, UpdateRequestDto updateRequestDto) {
-        UserResponseDto userResponseDto = userService.updateUserByUuid(uuid, updateRequestDto);
+    public APIResponse<UserResponseDto> updateUserByUuid(int id, UpdateRequestDto updateRequestDto) {
+        UserResponseDto userResponseDto = userService.updateUserByid(id, updateRequestDto);
         return new APIResponse<>(
                 userResponseDto != null ? 200 : 404,
                 userResponseDto != null ? "User updated successfully 😎" : "User Not Found!",
@@ -49,8 +49,8 @@ public class UserController {
         );
     }
 
-    public APIResponse<Integer> deleteUserByUuid(String uuid) {
-        int result = userService.deleteUserByUuid(uuid);
+    public APIResponse<Integer> deleteUserByid(int id) {
+        int result = userService.deleteUserByid(id);
         return new APIResponse<>(
                 result == 1 ? 200 : 404,
                 result == 1 ? "User deleted successfully" : "User Not Found!",

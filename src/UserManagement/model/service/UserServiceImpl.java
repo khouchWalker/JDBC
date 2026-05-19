@@ -9,7 +9,7 @@ import UserManagement.model.dto.UserResponseDto;
 
 import java.util.List;
 
-public class UserServiceImpl implements  UserService {
+public class UserServiceImpl implements UserService {
     private final UserDao userDao = new UserDao();
     private final UserMapper userMapper = new UserMapper();
 
@@ -52,28 +52,44 @@ public class UserServiceImpl implements  UserService {
     }
 
     @Override
-    public UserResponseDto updateUserByUuid(String uuid, UpdateRequestDto updateRequestDto) {
+    public UserResponseDto updateUserByid(int id, UpdateRequestDto updateRequestDto) {
         User user = userDao.findAll()
                 .stream()
-                .filter(u -> u.getUuid().equals(uuid))
+                .filter(u -> u.getId().equals(id))
                 .findFirst()
-                .orElse(null);
-        if (user != null) {
-            user.setName(updateRequestDto.name());
+                .get();
+         if(!user.getName().isEmpty()){
+             user.setName(updateRequestDto.name());
+
+         }
+        if(!user.getEmail().isEmpty()){
             user.setEmail(updateRequestDto.email());
-            user.setPassword(updateRequestDto.password());
+
+        }
+        if(!user.getProfile().isEmpty()){
             user.setProfile(updateRequestDto.profile());
+
+        }
+        if(!user.getPassword().isEmpty()){
+            user.setPassword(updateRequestDto.password());
+        }
+
+//        if (user != null) {
+//            user.setName(updateRequestDto.name());
+//            user.setEmail(updateRequestDto.email());
+//            user.setPassword(updateRequestDto.password());
+//            user.setProfile(updateRequestDto.profile());
             userDao.update(user);
             return userMapper.fromUserToUserResponseDto(user);
         }
-        return null;
-    }
+
+
 
     @Override
-    public int deleteUserByUuid(String uuid) {
+    public int deleteUserByid(int id) {
         User user = userDao.findAll()
                 .stream()
-                .filter(u -> u.getUuid().equals(uuid))
+                .filter(u -> u.getId().equals(id))
                 .findFirst()
                 .orElse(null);
         if (user != null) {
@@ -82,6 +98,9 @@ public class UserServiceImpl implements  UserService {
         }
         return 0;
     }
+
+
+
 
     @Override
     public List<UserResponseDto> searchUserByName(String name) {
