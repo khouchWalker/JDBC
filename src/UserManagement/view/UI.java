@@ -49,11 +49,11 @@ public class UI {
                 ==================== User Management System ========================
                 1. Create User
                 
-                3. Search User by name
-                4. Delete User by ID
-                5. Update User by UUID
-                6. List all Users
-                7. Exit
+                2. Search User by name
+                3. Delete User by ID
+                4. Update User by UUID
+                5. List all Users
+                6. Exit
                 """);
     }
     private static int insertOption(){
